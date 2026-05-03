@@ -87,6 +87,35 @@ npx jotbird list
 
 Shows all the user's published documents with their URLs, slugs, and expiration dates.
 
+### Publish at a namespaced URL (Pro)
+
+Pro users with a username set in Account Settings can publish at permanent, human-readable URLs like `share.jotbird.com/@username/my-page`. Use `--namespace` instead of `--slug`:
+
+```bash
+npx jotbird publish --namespace my-page document.md
+```
+
+**Output:**
+```
+✨ Published → https://share.jotbird.com/@username/my-page
+```
+
+The `.jotbird` mapping records the full `@username/slug` path, so subsequent publishes without any flags update the same namespaced URL automatically:
+
+```bash
+npx jotbird publish document.md
+```
+
+```
+✓ Updated → https://share.jotbird.com/@username/my-page
+```
+
+To delete a namespaced document:
+
+```bash
+npx jotbird remove --namespace my-page
+```
+
 ### Delete a document
 
 ```bash
