@@ -143,11 +143,18 @@ Permanently removes the published page. The URL stops working.
 - 3-60 characters
 - If not provided, JotBird generates a random three-word slug
 
+## Size limits
+
+- **Markdown source:** up to 256 KB (measured in UTF-8 bytes, so non-ASCII text counts for more)
+- **Rendered HTML:** up to 512 KB — the real ceiling, since formatting (CSS classes, math, syntax highlighting) expands the source
+
+An over-limit document is rejected with a "too large" error. If that happens, split the content across multiple pages or trim it before retrying.
+
 ## Content lifetime
 
-- Free accounts: URLs expire after 90 days
-- Pro accounts ($29/year): URLs never expire
-- Expired pages are automatically deleted
+- Free accounts: URLs expire after 90 days. On expiry the link stops working (returns "not found") and the slug is freed for reuse; the document itself is kept in the account, so it can be republished.
+- Pro accounts ($29/year): URLs never expire.
+- Anonymous pages (published without an account): automatically deleted 30 days after publishing — both the page and its record are removed.
 
 ## Tips
 
