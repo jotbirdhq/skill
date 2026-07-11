@@ -143,7 +143,7 @@ npx jotbird settings <file|slug> --theme minimal --visibility public
 | `--visibility <state>` | `unlisted` (default, noindex), `public` (search-indexable), `password` (Pro) |
 | `--password <pw>` | Page password, only with `--visibility password` |
 
-Changes apply to the live page immediately. Free accounts can always clear Pro settings (`--theme default`, `--show-branding`) and switch between `unlisted` and `public`; enabling a Pro setting on a free account fails and names the offending setting.
+Theme and branding changes apply to the live page right away. **Visibility changes can take up to about a minute** to reach the live page as the edge cache refreshes — the command has still succeeded, so don't re-run it or report a failure if the page looks unchanged; poll for up to a minute. (Turning password protection *on* is immediate; it's removing or relaxing it that waits on the cache.) Free accounts can always clear Pro settings (`--theme default`, `--show-branding`) and switch between `unlisted` and `public`; enabling a Pro setting on a free account fails and names the offending setting.
 
 **Setting a password non-interactively.** Omitting `--password` opens an interactive prompt, which an agent cannot answer. Pipe the password in instead — `--password -` reads one line from stdin (it refuses to run on a terminal, where the password would be echoed in cleartext):
 
