@@ -124,6 +124,35 @@ npx jotbird remove <slug>
 
 Permanently removes the published page. The URL stops working.
 
+### View or change page settings
+
+Read a published page's theme, branding, and visibility — and change them without republishing. Accepts a tracked filename, a slug, or an `@username/slug` path.
+
+```bash
+# Show current settings
+npx jotbird settings <file|slug>
+
+# Change them
+npx jotbird settings <file|slug> --theme minimal --visibility public
+```
+
+| Flag | Values |
+|------|--------|
+| `--theme <name>` | `default`, `minimal`, `essay`, `terminal` (non-default themes are Pro) |
+| `--hide-branding` / `--show-branding` | Hide or show the JotBird footer branding (hiding is Pro) |
+| `--visibility <state>` | `unlisted` (default, noindex), `public` (search-indexable), `password` (Pro) |
+| `--password <pw>` | Page password, only with `--visibility password` |
+
+Changes apply to the live page immediately. Free accounts can always clear Pro settings (`--theme default`, `--show-branding`) and switch between `unlisted` and `public`; enabling a Pro setting on a free account fails and names the offending setting.
+
+**Setting a password non-interactively.** Omitting `--password` opens an interactive prompt, which an agent cannot answer. Pipe the password in instead — `--password -` reads one line from stdin (it refuses to run on a terminal, where the password would be echoed in cleartext):
+
+```bash
+echo "$PAGE_PASSWORD" | npx jotbird settings my-page --visibility password --password -
+```
+
+Never put the password directly in the command line (`--password hunter2`): it lands in shell history and `ps` output. The `JOTBIRD_PAGE_PASSWORD` environment variable also works.
+
 ## Workflow
 
 1. **Compose the Markdown.** Write the content the user wants to publish. Use proper Markdown formatting — headings, lists, code blocks, links, etc. JotBird renders it with full Markdown support including tables, math (KaTeX), footnotes, callouts, and Mermaid diagrams.
